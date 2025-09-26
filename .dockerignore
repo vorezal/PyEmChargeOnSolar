@@ -1,0 +1,9 @@
+.env
+.gitignore
+Dockerfile
+compose.yaml
+.credentials/
+LICENSE
+README.md
+__pycache__
+venv

@@ -1,0 +1,5 @@
+dnspython==2.8.0
+pyemvue==0.18.9
+python-dotenv==1.1.1
+python_dateutil==2.9.0.post0
+Requests==2.32.5

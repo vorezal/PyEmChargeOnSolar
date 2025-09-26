@@ -1,0 +1,10 @@
+name: pyemchargeonsolar
+
+services:
+  pyemchargeonsolar:
+    image: vorezal/pyemchargeonsolar:latest
+    env_file:
+      - "./.env"
+    volumes:
+      - "./.credentials:/app/.credentials"
+    restart: unless-stopped
