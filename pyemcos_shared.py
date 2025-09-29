@@ -26,7 +26,7 @@ EMPORIA_ACCESS_FILE = '.credentials/emporia-access.json'
 DISABLE_DNS_TXT = os.getenv('DISABLE_DNS_TXT')
 
 # Disable via local file
-DISABLE_FILE = os.getenv('DISABLE_FILE')
+DISABLE_FILE = os.getenv('DISABLE_FILE', 'volume/disable')
 
 # Manual start and stop times. Overrides location based sunrise/sunset lookup. Specify datetime in ISO 8601 format e.g. %YYYY-%MM-%DDT%hh:%mm:%ss with no timezone (uses naive if unspecified)
 SCHEDULE_START = os.getenv('SCHEDULE_START')

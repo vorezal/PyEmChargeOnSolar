@@ -7,4 +7,5 @@ services:
       - "./.env"
     volumes:
       - "./.credentials:/app/.credentials"
+      - "./volume:/app/volume"
     restart: unless-stopped
