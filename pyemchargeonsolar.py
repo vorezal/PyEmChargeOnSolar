@@ -226,6 +226,7 @@ class PyEmChargeOnSolar:
 def main():
   start_time = None
   end_time = None
+  schedule_on = None
   solarschedule = pyemcos_data.SolarSchedule(pyemcos_shared.LOCATION_LAT, pyemcos_shared.LOCATION_LNG)
   pyemchargeonsolar = PyEmChargeOnSolar()
 
@@ -262,6 +263,7 @@ def main():
         print("Using location schedule:",start_time,end_time)
 
       if start_time is None or end_time is None or start_time <= now.time() <= end_time:
+        schedule_on = True
         # Update power generation stats
         pyemchargeonsolar.update_generation()
         # Update Emporia charger status
@@ -278,6 +280,14 @@ def main():
           pyemchargeonsolar.update_charge_amp_by_power_data()
         else:
           print("Charger is not connected to a vehicle. Skipping charger update.")
+      elif schedule_on:
+        # Outside of schedule, but schedule_on is True so it just ended this cycle. Make sure charger is off.
+        if pyemchargeonsolar.charger_on:
+          pyemchargeonsolar.emporia.set_charger_on(False)
+          pyemchargeonsolar.emporia.set_charging_rate(int(pyemcos_shared.MIN_AMPS))
+          pyemchargeonsolar.emporia.update_charger()
+
+        schedule_on = False
 
     time.sleep(int(pyemcos_shared.FREQ))
 
